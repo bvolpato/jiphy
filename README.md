@@ -33,7 +33,9 @@ Supported Operations & Examples
 #### Initialize
 
 ```java
-Jiphy jiphy = Jiphy.builder().apiKey(JiphyConstants.API_KEY_BETA).build();
+Jiphy jiphy = Jiphy.builder()
+    .apiKey(JiphyConstants.API_KEY_BETA)
+    .build();
 ```
 
 #### Search
