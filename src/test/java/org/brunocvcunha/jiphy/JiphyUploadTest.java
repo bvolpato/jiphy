@@ -38,7 +38,7 @@ public class JiphyUploadTest {
         assertTrue(true);
     }
     
-    //@Test
+    @Test
     public void testSearch() throws ClientProtocolException, IOException {
         Jiphy jiphy = Jiphy.builder().build();
 
