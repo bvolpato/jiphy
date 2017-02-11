@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.brunocvcunha.jiphy.model.JiphyGif;
 import org.brunocvcunha.jiphy.model.JiphySearchResponse;
 import org.brunocvcunha.jiphy.requests.JiphySearchRequest;
 import org.junit.Test;
@@ -41,6 +42,9 @@ public class JiphySearchTest {
         assertNotNull(cats);
         System.out.println(cats);
 
+        for (JiphyGif gif : cats.getData()) {
+            System.out.println("Cat: " + gif.getUrl());
+        }
         assertTrue(cats.getData().size() > 0);
 
     }
