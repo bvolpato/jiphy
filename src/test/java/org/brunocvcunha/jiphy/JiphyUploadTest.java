@@ -15,15 +15,39 @@
  */
 package org.brunocvcunha.jiphy;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class AppTest {
-    
-    //TODO: build tests!
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.brunocvcunha.jiphy.model.JiphyUploadResult;
+import org.brunocvcunha.jiphy.requests.JiphyUploadRequest;
+import org.junit.Test;
+
+/**
+ * Jiphy Upload Tests
+ * 
+ * @author Bruno Candido Volpato da Cunha
+ *
+ */
+public class JiphyUploadTest {
+
     @Test
     public void testSimple() {
         assertTrue(true);
+    }
+    
+    //@Test
+    public void testSearch() throws ClientProtocolException, IOException {
+        Jiphy jiphy = Jiphy.builder().build();
+
+        JiphyUploadResult upload = jiphy.sendRequest(new JiphyUploadRequest(new File("test.gif")));
+        assertNotNull(upload);
+        assertEquals(200, upload.getMeta().getStatus());
+
+        System.out.println(upload);
+
     }
 
 }

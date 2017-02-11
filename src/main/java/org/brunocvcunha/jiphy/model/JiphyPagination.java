@@ -13,10 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.brunocvcunha.jiphy;
+package org.brunocvcunha.jiphy.model;
 
-public class App {
-    
-    //TODO: build app!
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
+
+/**
+ * Pagination Result
+ * 
+ * @author Bruno Candido Volpato da Cunha
+ *
+ */
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class JiphyPagination {
+    private int total_count;
+    private int count;
+    private int offset;
 
 }

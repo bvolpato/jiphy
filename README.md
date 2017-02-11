@@ -6,7 +6,7 @@ jiphy
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.jiphy/jiphy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.jiphy/jiphy)
 [![Coverage Status](https://coveralls.io/repos/github/brunocvcunha/jiphy/badge.svg?branch=master)](https://coveralls.io/github/brunocvcunha/jiphy?branch=master)
 
-:nut_and_bolt: jiphy.
+:movie_camera: jiphy - Java Wrapper for Giphy API
 
 
 Download

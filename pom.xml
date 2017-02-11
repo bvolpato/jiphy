@@ -206,20 +206,6 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
-		<!-- Selenium -->
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>2.53.0</version>
-		</dependency>
-
-		<!-- Jsoup -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.7.3</version>
-		</dependency>
-
 		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -228,21 +214,35 @@
 			<scope>provided</scope>
 		</dependency>
 
-
-    <!-- Ghost me -->
-		<dependency>
-			<groupId>org.brunocvcunha.ghostme4j</groupId>
-			<artifactId>ghostme4j</artifactId>
-			<version>0.2</version>
-		</dependency>
-
-    <!-- Inutils -->
+		<!-- Inutils -->
 		<dependency>
 			<groupId>org.brunocvcunha.inutils4j</groupId>
 			<artifactId>inutils4j</artifactId>
 			<version>0.4</version>
 		</dependency>
-
+	
+	
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<profiles>
