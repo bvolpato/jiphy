@@ -4,7 +4,9 @@ jiphy
 [![Apache License](http://img.shields.io/badge/license-ASL-blue.svg)](https://github.com/brunocvcunha/jiphy/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/brunocvcunha/jiphy.svg)](https://travis-ci.org/brunocvcunha/jiphy)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.jiphy/jiphy/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.brunocvcunha.jiphy/jiphy)
-[![Coverage Status](https://coveralls.io/repos/github/brunocvcunha/jiphy/badge.svg?branch=master)](https://coveralls.io/github/brunocvcunha/jiphy?branch=master)  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Coverage Status](https://coveralls.io/repos/github/brunocvcunha/jiphy/badge.svg?branch=master)](https://coveralls.io/github/brunocvcunha/jiphy?branch=master) 
+[![Code Climate](https://codeclimate.com/github/brunocvcunha/jiphy/badges/gpa.svg)](https://codeclimate.com/github/brunocvcunha/jiphy)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 :movie_camera: jiphy - Java Wrapper for Giphy API
 
