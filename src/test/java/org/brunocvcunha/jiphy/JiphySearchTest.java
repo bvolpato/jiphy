@@ -15,12 +15,9 @@
  */
 package org.brunocvcunha.jiphy;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.jiphy.model.JiphyGif;
 import org.brunocvcunha.jiphy.model.JiphySearchResponse;
 import org.brunocvcunha.jiphy.requests.JiphySearchRequest;
@@ -34,18 +31,31 @@ import org.junit.Test;
  */
 public class JiphySearchTest {
 
+    private static final String API_KEY = "test-key";
+    private static final String SEARCH_RESPONSE = "{"
+            + "\"data\":[{\"type\":\"gif\",\"id\":\"cat-id\",\"url\":\"https://giphy.example/cat.gif\","
+            + "\"images\":{\"fixed_height\":{\"url\":\"https://giphy.example/cat-height.gif\",\"width\":\"200\",\"height\":\"200\"}}}],"
+            + "\"pagination\":{\"total_count\":1,\"count\":1,\"offset\":0},"
+            + "\"meta\":{\"status\":200,\"msg\":\"OK\"}"
+            + "}";
+
     @Test
-    public void testSearch() throws ClientProtocolException, IOException {
+    public void testSearch() {
 
-        Jiphy jiphy = Jiphy.builder().build();
-        JiphySearchResponse cats = jiphy.sendRequest(new JiphySearchRequest("cats"));
+        JiphySearchRequest request = new JiphySearchRequest("cats");
+        request.setApi(Jiphy.builder().apiKey(API_KEY).build());
+
+        assertEquals("/gifs/search?q=cats&api_key=" + API_KEY, request.getUrl());
+
+        JiphySearchResponse cats = request.parseResult(200, SEARCH_RESPONSE);
         assertNotNull(cats);
-        System.out.println(cats);
+        assertEquals(200, cats.getMeta().getStatus());
+        assertEquals(1, cats.getData().size());
 
-        for (JiphyGif gif : cats.getData()) {
-            System.out.println("Cat: " + gif.getUrl());
-        }
-        assertTrue(cats.getData().size() > 0);
+        JiphyGif gif = cats.getData().get(0);
+        assertEquals("cat-id", gif.getId());
+        assertEquals("https://giphy.example/cat.gif", gif.getUrl());
+        assertEquals("https://giphy.example/cat-height.gif", gif.getImages().get("fixed_height").getUrl());
 
     }
 
