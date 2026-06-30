@@ -15,12 +15,9 @@
  */
 package org.brunocvcunha.jiphy;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.jiphy.model.JiphySearchResponse;
 import org.brunocvcunha.jiphy.requests.JiphyTrendingRequest;
 import org.junit.Test;
@@ -33,17 +30,25 @@ import org.junit.Test;
  */
 public class JiphyTrendingTest {
 
+    private static final String API_KEY = "test-key";
+    private static final String TRENDING_RESPONSE = "{"
+            + "\"data\":[{\"type\":\"gif\",\"id\":\"trend-id\",\"url\":\"https://giphy.example/trend.gif\"}],"
+            + "\"pagination\":{\"total_count\":1,\"count\":1,\"offset\":0},"
+            + "\"meta\":{\"status\":200,\"msg\":\"OK\"}"
+            + "}";
 
     @Test
-    public void testTrending() throws ClientProtocolException, IOException {
-        Jiphy jiphy = Jiphy.builder().build();
+    public void testTrending() {
+        JiphyTrendingRequest request = new JiphyTrendingRequest();
+        request.setApi(Jiphy.builder().apiKey(API_KEY).build());
 
-        JiphySearchResponse trend = jiphy.sendRequest(new JiphyTrendingRequest());
+        assertEquals("/gifs/trending?api_key=" + API_KEY, request.getUrl());
+
+        JiphySearchResponse trend = request.parseResult(200, TRENDING_RESPONSE);
         assertNotNull(trend);
-        System.out.println(trend);
-
-        assertTrue(trend.getData().size() > 0);
-
+        assertEquals(200, trend.getMeta().getStatus());
+        assertEquals(1, trend.getData().size());
+        assertEquals("trend-id", trend.getData().get(0).getId());
     }
 
 }

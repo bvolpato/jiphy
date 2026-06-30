@@ -15,12 +15,11 @@
  */
 package org.brunocvcunha.jiphy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.jiphy.model.JiphyUploadResult;
 import org.brunocvcunha.jiphy.requests.JiphyUploadRequest;
 import org.junit.Test;
@@ -33,20 +32,24 @@ import org.junit.Test;
  */
 public class JiphyUploadTest {
 
-    @Test
-    public void testSimple() {
-        assertTrue(true);
-    }
-    
-    @Test
-    public void testSearch() throws ClientProtocolException, IOException {
-        Jiphy jiphy = Jiphy.builder().build();
+    private static final String API_KEY = "test-key";
+    private static final String UPLOAD_RESPONSE = "{"
+            + "\"data\":{\"id\":\"uploaded-id\"},"
+            + "\"meta\":{\"status\":200,\"msg\":\"OK\"}"
+            + "}";
 
-        JiphyUploadResult upload = jiphy.sendRequest(new JiphyUploadRequest(new File("test.gif")));
+    @Test
+    public void testUpload() {
+        JiphyUploadRequest request = new JiphyUploadRequest(new File("test.gif"));
+        request.setApi(Jiphy.builder().apiKey(API_KEY).build());
+
+        assertEquals("POST", request.getMethod());
+        assertEquals("/gifs?api_key=" + API_KEY, request.getUrl());
+
+        JiphyUploadResult upload = request.parseResult(200, UPLOAD_RESPONSE);
         assertNotNull(upload);
         assertEquals(200, upload.getMeta().getStatus());
-
-        System.out.println(upload);
+        assertEquals("uploaded-id", upload.getData().getId());
 
     }
 

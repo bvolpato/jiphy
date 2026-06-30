@@ -15,12 +15,9 @@
  */
 package org.brunocvcunha.jiphy;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.brunocvcunha.jiphy.model.JiphySearchResponse;
 import org.brunocvcunha.jiphy.requests.JiphyTranslateRequest;
 import org.junit.Test;
@@ -33,17 +30,24 @@ import org.junit.Test;
  */
 public class JiphyTranslateTest {
 
+    private static final String API_KEY = "test-key";
+    private static final String TRANSLATE_RESPONSE = "{"
+            + "\"data\":{\"type\":\"gif\",\"id\":\"superman-id\",\"url\":\"https://giphy.example/superman.gif\"},"
+            + "\"meta\":{\"status\":200,\"msg\":\"OK\"}"
+            + "}";
 
     @Test
-    public void testTranslate() throws ClientProtocolException, IOException {
-        Jiphy jiphy = Jiphy.builder().build();
+    public void testTranslate() {
+        JiphyTranslateRequest request = new JiphyTranslateRequest("superman");
+        request.setApi(Jiphy.builder().apiKey(API_KEY).build());
 
-        JiphySearchResponse translate = jiphy.sendRequest(new JiphyTranslateRequest("superman"));
+        assertEquals("/gifs/translate?s=superman&api_key=" + API_KEY, request.getUrl());
+
+        JiphySearchResponse translate = request.parseResult(200, TRANSLATE_RESPONSE);
         assertNotNull(translate);
-        System.out.println(translate);
-
-        assertTrue(translate.getData().size() > 0);
-
+        assertEquals(200, translate.getMeta().getStatus());
+        assertEquals(1, translate.getData().size());
+        assertEquals("superman-id", translate.getData().get(0).getId());
     }
 
 }
